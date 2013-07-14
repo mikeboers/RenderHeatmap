@@ -1,0 +1,67 @@
+Display "out/spheres.tif" "tiff" "rgba"
+Projection "perspective" "fov" [21.831]
+Format 960 540 1
+
+Translate 0 -1.207 14.142
+Rotate 59.036 0 1 0
+Rotate -26.565 6 0 10
+
+WorldBegin
+	
+	LightSource
+		"shadowdistant" 1
+		"to" [-100 -100 0]
+		"lightcolor" [0.5 1 0.5]
+		"intensity" [0.8]
+		"string shadowname" "raytrace"
+
+	LightSource
+		"shadowdistant" 2
+		"to" [0 -100 100]
+		"lightcolor" [1 0.5 0.5]
+		"intensity" [0.8]
+		"string shadowname" "raytrace"
+
+	LightSource
+		"shadowdistant" 3
+		"to" [100 -100 -100]
+		"lightcolor" [0.5 0.5 1]
+		"intensity" [0.8]
+		"string shadowname" "raytrace"
+	
+	Color 1 1 1
+	Surface "matte"
+	Attribute "visibility" "integer transmission" [1]
+
+	# Floor.
+	TransformBegin
+		Rotate 90 1 0 0
+		Disk 0 3 360
+	TransformEnd
+
+	# Lower spheres.
+	TransformBegin
+		Translate 1 1 1
+		Sphere 1 -1 1 360
+	TransformEnd
+	TransformBegin
+		Translate 1 1 -1
+		Sphere 1 -1 1 360
+	TransformEnd
+	TransformBegin
+		Translate -1 1 1
+		Sphere 1 -1 1 360
+	TransformEnd
+	TransformBegin
+		Translate -1 1 -1
+		Sphere 1 -1 1 360
+	TransformEnd
+	
+	# Upper sphere.
+	TransformBegin
+		Translate 0 2.4142135 0
+		Sphere 1 -1 1 360
+	TransformEnd
+
+
+WorldEnd
