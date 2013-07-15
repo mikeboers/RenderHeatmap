@@ -7,9 +7,10 @@ SHADER_OBJS := ${SHADERS:%.sl=%.slo}
 SRCS := 
 OBJS := ${SRCS:src/%.cpp=build/%.o}
 LIBS := lib/time_shadeops.so
+BINS := bin/remap
 
-CFLAGS := -g -Iinclude -I$$RMANTREE/include $(shell python-config --includes)
-LDFLAGS := $(shell python-config --libs)
+CFLAGS := -g -Iinclude -I $$RMANTREE/include $(shell Magick++-config --cppflags --cxxflags)
+LDFLAGS := -L $$RMANTREE/lib -lprman $(shell Magick++-config --ldflags --libs)
 PYTHON:= PYTHONPATH=$$RMANTREE/bin python
 RENDERFLAGS := 
 RENDER := ${PYTHON} render.py ${RENDERFLAGS}
@@ -21,7 +22,7 @@ TEXTURES := textures/van.jpg
 
 default: build
 
-build: ${LIBS}
+build: ${BINS} ${LIBS}
 
 shaders: ${SHADER_OBJS}
 	@ mkdir -p var/shaders
@@ -32,6 +33,12 @@ shaders/%.slo: shaders/%.sl
 build/%.o: src/%.cpp
 	@ mkdir -p build
 	g++ ${CFLAGS} -c -o $@ $<
+
+
+bin/%: build/%.o ${OBJS}
+	@ mkdir -p bin
+	g++ ${LDFLAGS} -o $@ $^
+	install_name_tool -add_rpath $$RMANTREE/lib $@
 
 lib/%.so: build/%.o ${OBJS}
 	@ mkdir -p lib
@@ -48,5 +55,6 @@ ex1: build shaders textures
 
 clean:
 	- rm -rf build
+	- rm -rf bin
 	- rm lib/*.so
 	- rm shaders/*.slo

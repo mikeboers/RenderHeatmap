@@ -1,8 +1,7 @@
 Display "out/spheres.tif" "tiff" "rgba"
 
 DisplayChannel "varying float surfaceTime"
-Display "+out/spheres-surface.tif" "tiff" "surfaceTime"
-	"quantize" [0 0 0 0]
+Display "+out/spheres-surface.dtex" "deepshad" "surfaceTime"
 
 Projection "perspective" "fov" [21.831]
 Format 960 540 1

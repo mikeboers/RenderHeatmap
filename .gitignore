@@ -5,7 +5,9 @@
 *.pyc
 *.tif
 *.exr
+*.dtex
 
+/bin
 /build
 /textures
 /venv
