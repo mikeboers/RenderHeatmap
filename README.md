@@ -2,32 +2,16 @@ Render Stat Heatmaps
 ====================
 
 
-Questions
----------
-
-- Can we have AOVs out of every render method? E.g. displacement, prelighting, etc..
-
-
-
 TODO
 ----
 
-- automatic shader composer via RIB Filter and co-shaders
-  - use sloinfo (or API) to get a list of methods to make a standin for the
-    shader.
-  - use sloinfo (or API) to get the shader defaults, since some of them have
-    special significance
-  - replace all Surface calls with a Shader call, and a new Surface to the
-    interposer
-  - time everything, and store the duration in an output variable
-  - create a output driver which saves the shadingDuration variable, ideally
-    as a deep image
-
-- heat-map of shader execution time
-  - time_current() shadeop
-  - time_sleep() shadeop to test it with
-
+- time output should be color(start_time, duration, random())
+- copy output variables from wrapped; when does this need to happen?
 - tool to sum depth contributions
+  - calculate floats
+  - determine min/max, and range into 0 to 1
+  - skip points that match previous ones, except in depth
+    - std::set of 3-tuples of floats
 
 - examples
   - spheres

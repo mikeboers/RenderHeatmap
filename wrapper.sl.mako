@@ -16,7 +16,7 @@ plugin "time_shadeops";
 class ${name}(
 
     string wrapped_handle = "";
-    output uniform float surfaceTime;
+    output uniform color surfaceTime;
 
 ) {
     
@@ -35,7 +35,7 @@ class ${name}(
         if (_wrapped != null) {
             _wrapped->surface(Ci, Oi);
         }
-        surfaceTime = time() - startTime;
+        surfaceTime = color(time() - startTime, startTime, 0);
     }
     % endif
 

@@ -7,7 +7,7 @@ SHADER_OBJS := ${SHADERS:%.sl=%.slo}
 SRCS := 
 OBJS := ${SRCS:src/%.cpp=build/%.o}
 LIBS := lib/time_shadeops.so
-BINS := bin/remap
+BINS := bin/dtex_heatmap
 
 CFLAGS := -g -Iinclude -I $$RMANTREE/include $(shell Magick++-config --cppflags --cxxflags)
 LDFLAGS := -L $$RMANTREE/lib -lprman $(shell Magick++-config --ldflags --libs)
@@ -51,7 +51,8 @@ python:
 ex1: build shaders textures
 	@ mkdir -p out
 	${RENDER} scenes/spheres.rib
-
+ex1-heat: build
+	bin/dtex_heatmap out/spheres-surface.dtex out/spheres-surface.tif
 
 clean:
 	- rm -rf build

@@ -1,10 +1,10 @@
 Display "out/spheres.tif" "tiff" "rgba"
 
-DisplayChannel "varying float surfaceTime"
+DisplayChannel "varying color surfaceTime"
 Display "+out/spheres-surface.dtex" "deepshad" "surfaceTime"
 
 Projection "perspective" "fov" [21.831]
-Format 960 540 1
+Format 640 480 1
 
 Option "searchpath"
 	"shader" "&:shaders:var/shaders:lib"
@@ -40,7 +40,8 @@ WorldBegin
 		"string shadowname" "raytrace"
 	
 	Color 1 1 1
-	Surface "matte"
+	# Opacity 0.5 0.5 0.5
+	Surface "aachrome"
 	Attribute "visibility"
 		"integer transmission" [1]
 		"integer trace" [1]
@@ -74,8 +75,6 @@ WorldBegin
 	# Upper sphere.
 	TransformBegin
 		Translate 0 2.4142135 0
-
-		Surface "aaglass"
 		Sphere 1 -1 1 360
 	TransformEnd
 
