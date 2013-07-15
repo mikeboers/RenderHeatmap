@@ -1,15 +1,17 @@
-<% '''
+<%doc>
 
-public void displacement(output point P; output normal N);
-public void opacity(output color Oi);
-public void surface(output color Ci, Oi);
-public void volume(output color Ci, Oi);
-public void light(output vector L; output color Cl);
-public void prelighting(output color Ci, Oi);
-public void lighting(output color Ci, Oi);
-public void postlighting(output color Ci, Oi);
+Pipeline methods to wrap:
 
-''' %>
+    public void displacement(output point P; output normal N);
+    public void opacity(output color Oi);
+    public void surface(output color Ci, Oi);
+    public void volume(output color Ci, Oi);
+    public void light(output vector L; output color Cl);
+    public void prelighting(output color Ci, Oi);
+    public void lighting(output color Ci, Oi);
+    public void postlighting(output color Ci, Oi);
+
+</%doc>
 
 plugin "time_shadeops";
 
