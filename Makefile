@@ -10,8 +10,9 @@ LIBS := lib/DebugRtx.so lib/PythonRtx.so
 
 CFLAGS := -g -Iinclude -I$$RMANTREE/include $(shell python-config --includes)
 LDFLAGS := $(shell python-config --libs)
+PYTHON:= PYTHONPATH=$$RMANTREE/bin python
 RENDERFLAGS := 
-RENDER := PYTHONPATH=$$RMANTREE/bin python render.py ${RENDERFLAGS}
+RENDER := ${PYTHON} render.py ${RENDERFLAGS}
 
 TEXTURES := textures/van.jpg
 
@@ -35,6 +36,9 @@ lib/%.so: build/%.o ${OBJS}
 	@ mkdir -p lib
 	g++ ${LDFLAGS} -bundle -undefined dynamic_lookup -o $@ $^
 
+
+python:
+	${PYTHON}
 
 ex1: build shaders textures
 	@ mkdir -p out
