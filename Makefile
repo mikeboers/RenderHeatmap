@@ -22,7 +22,7 @@ TEXTURES := textures/van.jpg
 
 default: build
 
-build: ${BINS} ${LIBS}
+build: ${BINS} ${LIBS} ${SHADER_OBJS}
 
 shaders: ${SHADER_OBJS}
 	@ mkdir -p var/shaders

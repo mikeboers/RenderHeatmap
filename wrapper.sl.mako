@@ -12,13 +12,30 @@ Pipeline methods to wrap:
     public void postlighting(output color Ci, Oi);
 
 </%doc>
+<%!
+
+    pipeline_methods = (
+        ('opacity', 'output color Oi', 'Oi'),
+        ('surface', 'output color Ci, Oi', 'Ci, Oi'),
+        ('volume', 'output color Ci, Oi', 'Ci, Oi'),
+        ('prelighting', 'output color Ci, Oi', 'Ci, Oi'),
+        ('lighting', 'output color Ci, Oi', 'Ci, Oi'),
+        ('diffuselighting', 'output color Ci, Oi', 'Ci, Oi'),
+        ('specularlighting', 'output color Ci, Oi', 'Ci, Oi'),
+        ('postlighting', 'output color Ci, Oi', 'Ci, Oi'),
+    )
+
+%>
 
 plugin "time_shadeops";
 
 class ${name}(
 
     string wrapped_handle = "";
-    output uniform color surfaceTime;
+
+    % for method, _, _ in pipeline_methods:
+    output uniform float ${method}Time;
+    % endfor
 
 ) {
     
@@ -31,14 +48,18 @@ class ${name}(
         _wrapped = getshader(wrapped_handle);
     }
 
-    % if 'surface' in methods:
-    public void surface(output color Ci, Oi) {
+    % for method, params, args in pipeline_methods:
+    % if method in methods:
+
+    public void ${method}(${params}) {
         uniform float startTime = time();
         if (_wrapped != null) {
-            _wrapped->surface(Ci, Oi);
+            _wrapped->${method}(${args});
         }
-        surfaceTime = color(time() - startTime, startTime, 0);
+        ${method}Time = time() - startTime;
     }
+    
     % endif
+    % endfor
 
 }

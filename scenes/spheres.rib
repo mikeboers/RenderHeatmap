@@ -1,6 +1,6 @@
 Display "out/spheres.tif" "tiff" "rgba"
 
-DisplayChannel "varying color surfaceTime"
+DisplayChannel "varying float surfaceTime"
 Display "+out/spheres-surface.dtex" "deepshad" "surfaceTime"
 
 Projection "perspective" "fov" [21.831]
@@ -41,7 +41,7 @@ WorldBegin
 	
 	Color 1 1 1
 	# Opacity 0.5 0.5 0.5
-	Surface "aachrome"
+	Surface "plastic"
 	Attribute "visibility"
 		"integer transmission" [1]
 		"integer trace" [1]
