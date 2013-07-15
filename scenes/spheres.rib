@@ -10,6 +10,9 @@ Format 960 540 1
 Option "searchpath"
 	"shader" "&:shaders:var/shaders:lib"
 
+# Option "limits"
+#	"gridsize" 1
+
 Translate 0 -1.207 14.142
 Rotate 59.036 0 1 0
 Rotate -26.565 6 0 10
