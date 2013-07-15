@@ -4,7 +4,9 @@
 *.slo
 *.pyc
 *.tif
+*.exr
 
 /build
 /textures
 /venv
+/var

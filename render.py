@@ -90,12 +90,12 @@ def wrap_shader(name):
     params = get_shader_parameters(path)
 
     wrapped_name = 'wrapped_%s' % name
-    wrapped_path = os.path.join('shaders', wrapped_name) + '.sl'
+    wrapped_path = os.path.join('var', 'shaders', wrapped_name) + '.sl'
     with open(wrapped_path, 'w') as fh:
         template = Template(filename='wrapper.sl.mako')
         fh.write(template.render(name=wrapped_name, params=params, methods=set(methods)))
 
-    call(['shader', '-o', wrapped_path + 'o', wrapped_path])
+    call(['shader', '-Ilib', '-o', wrapped_path + 'o', wrapped_path])
     return wrapped_name
 
 
@@ -106,8 +106,6 @@ class ShaderWrapper(prman.Rif):
         self._coshader_count = 0
 
     def Surface(self, name, kw):
-        debug('ShaderWrapper: Surface(%s, %s)' % (name, kw))
-
         wrapped = wrap_shader(name)
         if wrapped:
             self._coshader_count += 1

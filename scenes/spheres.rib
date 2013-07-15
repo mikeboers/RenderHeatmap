@@ -1,9 +1,14 @@
 Display "out/spheres.tif" "tiff" "rgba"
+
+DisplayChannel "varying float surfaceTime"
+Display "+out/spheres-surface.tif" "tiff" "surfaceTime"
+	"quantize" [0 0 0 0]
+
 Projection "perspective" "fov" [21.831]
 Format 960 540 1
 
 Option "searchpath"
-	"shader" "&:shaders"
+	"shader" "&:shaders:var/shaders:lib"
 
 Translate 0 -1.207 14.142
 Rotate 59.036 0 1 0
@@ -34,7 +39,11 @@ WorldBegin
 	
 	Color 1 1 1
 	Surface "matte"
-	Attribute "visibility" "integer transmission" [1]
+	Attribute "visibility"
+		"integer transmission" [1]
+		"integer trace" [1]
+		"integer specular" [1]
+		"integer diffuse" [1]
 
 	# Floor.
 	TransformBegin
@@ -63,6 +72,8 @@ WorldBegin
 	# Upper sphere.
 	TransformBegin
 		Translate 0 2.4142135 0
+
+		Surface "aaglass"
 		Sphere 1 -1 1 360
 	TransformEnd
 

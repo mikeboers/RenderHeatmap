@@ -4,9 +4,9 @@
 SHADERS := $(wildcard shaders/*.sl)
 SHADER_OBJS := ${SHADERS:%.sl=%.slo}
 
-SRCS := src/utils.cpp
+SRCS := 
 OBJS := ${SRCS:src/%.cpp=build/%.o}
-LIBS := lib/DebugRtx.so lib/PythonRtx.so
+LIBS := lib/time_shadeops.so
 
 CFLAGS := -g -Iinclude -I$$RMANTREE/include $(shell python-config --includes)
 LDFLAGS := $(shell python-config --libs)
@@ -21,9 +21,10 @@ TEXTURES := textures/van.jpg
 
 default: build
 
-build:
+build: ${LIBS}
 
 shaders: ${SHADER_OBJS}
+	@ mkdir -p var/shaders
 
 shaders/%.slo: shaders/%.sl
 	shader -O2 -o $@ $<
