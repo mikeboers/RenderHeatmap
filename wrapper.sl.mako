@@ -57,6 +57,9 @@ class ${name}(
             _wrapped->${method}(${args});
         }
         ${method}Time = time() - startTime;
+        // if (first_sample()) {
+        //     rbug(P, color(surfaceTime, surfaceTime * 100, surfaceTime * 10000));
+        // }
     }
     
     % endif
